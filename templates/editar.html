@@ -1,21 +1,36 @@
 {% extends "template.html" %}
 {% block conteudo %}
       <form action="{{url_for('atualizar')}}" method="post">
+        <figure class="img-thumbnail col-md-4">
+          <img src="{{ url_for('imagem', nome_arquivo=capa_jogo) }}" class="img-fluid">
+          <figcaptionL>
+            <label class="fileContainer">
+              Mudar Capa
+              <input typer="file" name="arquivo" accept=".jpg">
+            </label>
+          </figcaptionL>
+        </figure>
         <fieldset>
-            <input type="hidden" name="id" value="{{ jogo.id }}">
-          <div class="form-group">
-            <label for="nome">Nome NOVO</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="{{ jogo.nome }}">
-          </div>
-          <div class="form-group">
-            <label for="categoria">Categoria NOVA</label>
-            <input type="text" id="categoria" name="categoria" class="form-control" value="{{ jogo.categoria }}">
-          </div>
-          <div class="form-group">
-            <label for="console">Console NOVO</label>
-            <input type="text" id="console" name="console" class="form-control" value="{{ jogo.console }}">
-          </div>
-          <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <input type="hidden" name="id" value="{{ id }}">
+            {{ form.csrf_token() }}
+            <div class="form-group">
+              {{ form.nome.label(class='form-label') }}
+              {{ form.nome(classe='form-control') }}
+            </div>
+            <div class="form-group">
+              {{ form.categoria.label(class='form-label') }}
+  
+              {{ form.categoria(classe='form-control') }}
+  
+            </div>
+            <div class="form-group">
+              {{ form.console.label(class='form-label') }}
+  
+              {{ form.console(classe='form-control') }}
+  
+            </div>
+            <div>{{ form.salvar(class='btn btn-primary') }}</div>
+            <a href="{{ url_for('index') }}">OUT</a>
         </fieldset>
       </form>
 {% endblock %}
